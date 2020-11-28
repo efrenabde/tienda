@@ -9,8 +9,8 @@ jobs:
     steps:
       - checkout
       - run:
-          command: cp /tienda-micros/requirements.txt /home/circleci/project/
-          name: copy
+          command: cp /tienda-micros/users/requirements.txt /home/circleci/project/
+          name: copy    
       - python/load-cache
       - python/install-deps
       - python/save-cache
