@@ -9,6 +9,9 @@ jobs:
     steps:
       - checkout
       - run:
+          command: chmod -R 777 ./tienda-micros
+          name: Permisos    
+      - run:
           command: cp ./tienda-micros/users/requirements.txt /home/circleci/project/
           name: copy    
       - python/load-cache
