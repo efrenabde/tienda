@@ -8,12 +8,12 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
       - run:
           command: cp /tienda-micros/requirements.txt /home/circleci/project/
           name: copy
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
       - run:
           command: ./tienda-micros/orders/application.py test
           name: Test
