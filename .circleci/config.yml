@@ -12,6 +12,7 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
+          command: ls /home/circleci/tienda-micros/
           command: ./tienda-micros/orders/application.py test
           name: Test
 
