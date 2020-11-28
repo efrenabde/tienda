@@ -12,7 +12,7 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: ./tienda-micros/orders/manage.py test
+          command: ./tienda-micros/orders/application.py test
           name: Test
 
 workflows:
