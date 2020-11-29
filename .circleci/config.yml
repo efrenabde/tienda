@@ -17,7 +17,9 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: pytest ./tienda-micros/users/application_test.py 
+          command: |
+            pytest ./tienda-micros/users/application_test.py 
+            py.test --cov users
           name: Test
 
 workflows:
