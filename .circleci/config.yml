@@ -10,17 +10,14 @@ jobs:
       - checkout
       - run:
           command: |
-            chmod -R 777 ./tienda-micros      
-            brew install pyenv            
+            chmod -R 777 ./tienda-micros          
             cp ./tienda-micros/users/requirements.txt /home/circleci/project/
           name: Permiso - Copy    
       - python/load-cache
       - python/install-deps
       - python/save-cache
       - run:
-          command: |
-            pytest ./tienda-micros/users/application_test.py 
-            
+          command: pytest ./tienda-micros/users/application_test.py 
           name: Test
 
 workflows:
