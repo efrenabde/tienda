@@ -5,7 +5,7 @@ class UsersModel(db.Model):
     __tablename__ = "usuarios"
 
     # Ids
-    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     # Attributes
     # 1:Admin - 2:Repartidor - 3: Tendero
