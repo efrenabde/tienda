@@ -10,7 +10,8 @@ jobs:
       - checkout
       - run:
           command: |
-            chmod -R 777 ./tienda-micros          
+            chmod -R 777 ./tienda-micros      
+            brew install pyenv            
             cp ./tienda-micros/users/requirements.txt /home/circleci/project/
           name: Permiso - Copy    
       - python/load-cache
