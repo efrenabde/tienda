@@ -1,0 +1,30 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - checkout
+      - run:
+          command: |
+            chmod -R 777 ./tienda-micros          
+            cp ./tienda-micros/users/requirements.txt /home/circleci/project/
+          name: Permiso - Copy    
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+      - run:
+          command: |
+            python -m pytest ./tienda-micros/users/application_test.py 
+            python -m pytest --cov application ./tienda-micros/users/application_test.py
+            python -m pytest ./tienda-micros/orders/application_test.py 
+            python -m pytest --cov application ./tienda-micros/orders/application_test.py
+          name: Test
+
+workflows:
+  main:
+    jobs:
+      - build-and-test
