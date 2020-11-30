@@ -32,8 +32,11 @@ class OrderRepositoryDao:
         return order
 
     @staticmethod
-    def get_order_by_id(orderId) -> OrdersModel:
-        return OrdersModel.query.filter(OrdersModel.id == orderId).first()
+    def get_order_by_id(orderId):
+        resObject = { }
+        resObject["orderInfo"] =  OrdersModel.query.filter(OrdersModel.id == orderId).first()
+        resObject["products"] = ProductsModel.query.filter(ProductsModel.id_orden == orderId).all()
+        return resObject
     
     @staticmethod
     def list_orders() -> List[OrdersModel]:
