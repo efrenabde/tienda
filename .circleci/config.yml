@@ -20,6 +20,8 @@ jobs:
           command: |
             python -m pytest ./tienda-micros/users/application_test.py 
             python -m pytest --cov application ./tienda-micros/users/application_test.py
+            python -m pytest ./tienda-micros/orders/application_test.py 
+            python -m pytest --cov application ./tienda-micros/orders/application_test.py
           name: Test
 
 workflows:
