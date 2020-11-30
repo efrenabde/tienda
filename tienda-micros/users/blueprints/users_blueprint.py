@@ -29,3 +29,19 @@ def create_users_blueprint(blueprint_name: str, resource_type: str, resource_pre
         return json.dumps(user, cls=AlchemyEncoder), 200
 
     return blueprint
+
+    @blueprint.route(f'/{resource_prefix}/<user_id>', methods=["PUT"])
+    def modify_user(user_id):
+        logger.info(f"Modificar Usuario {user_id}")
+        user = UserRepositoryDao.get_user_by_id(userId=user_id)
+        return json.dumps(user, cls=AlchemyEncoder), 200
+
+    return blueprint
+
+    @blueprint.route(f'/{resource_prefix}', methods=["GET"])
+    def list_users():
+        logger.info(f"Listar usuarios")
+        user = UserRepositoryDao.get_user_by_id(userId=user_id)
+        return json.dumps(user, cls=AlchemyEncoder), 200
+
+    return blueprint

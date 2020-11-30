@@ -18,3 +18,14 @@ class UserRepositoryDao:
     @staticmethod
     def get_user_by_id(userId) -> UsersModel:
         return UsersModel.query.filter(UsersModel.id == userId).first()
+
+    @staticmethod
+    def list_all_user() -> List[UsersModel]:
+        return UsersModel.query.all()
+    
+    @staticmethod
+    def modify_user_by_id(userId):
+        user = UsersModel.query.filter(UsersModel.id == userId).first()
+        user.nombre_usuario = nombre
+        user.tipo = tipo
+        db.session.commit()

@@ -20,14 +20,43 @@ def create_orders_blueprint(blueprint_name: str, resource_type: str, resource_pr
     @blueprint.route(f'/{resource_prefix}', methods=["POST"])
     def create_order():
         logger.info("Creando usuario")
-        order= OrderRepositoryDao.create_order(nomProducto = request.get_json(force=True)['nombreProducto'],
-                                                valorProducto= request.get_json(force=True)['valorProducto'],
-                                                cantProducto=request.get_json(force=True)['cantidadProducto'])
+        order= OrderRepositoryDao.create_order( productos= request.get_json(force=True)['productos'],
+                                                descuento= request.get_json(force=True)['descuento'],
+                                                valorTotal= request.get_json(force=True)['valorTotal'],
+                                                idUsuario= request.get_json(force=True)['idUsuario'])
         return json.dumps(order, cls=AlchemyEncoder), 201
     
     @blueprint.route(f'/{resource_prefix}/<order_id>', methods=["GET"])
     def get_order(order_id):
-        logger.info(f"Consulta de Usuario {order_id}")
+        logger.info(f"Consulta de orden {order_id}")
+        order = OrderRepositoryDao.get_order_by_id(orderId=order_id)
+        return json.dumps(order, cls=AlchemyEncoder), 200
+
+    return blueprint
+
+    @blueprint.route(f'/{resource_prefix}/<order_id>', methods=["PUT"])
+    def modify_order(order_id):
+        logger.info(f"Actualización de orden de orden {order_id}")
+        order = OrderRepositoryDao.modify_order_by_id(orderId=order_id,
+                                                descuento=request.get_json(force=True)['descuento'],
+                                                valorTotal=request.get_json(force=True)['valorTotal'],
+                                                idUsuario=request.get_json(force=True)['idUsuario'],
+                                                productos= request.get_json(force=True)['productos'])
+        return json.dumps(order, cls=AlchemyEncoder), 200
+
+    return blueprint
+
+    @blueprint.route(f'/{resource_prefix}', methods=["GET"])
+    def list_orders():
+        logger.info(f"Listar ordenes")
+        order = OrderRepositoryDao.list_orders()
+        return json.dumps(order, cls=AlchemyEncoder), 200
+
+    return blueprint
+
+    @blueprint.route(f'/{resource_prefix}/users/<user_id>', methods=["GET"])
+    def list_orders_by_user(user_id):
+        logger.info(f"Consulta de orden por usuario {user_id}")
         order = OrderRepositoryDao.get_order_by_id(orderId=order_id)
         return json.dumps(order, cls=AlchemyEncoder), 200
 
