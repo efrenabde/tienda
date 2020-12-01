@@ -24,3 +24,12 @@ def test_creation_order():
     
     print('Respuesta', rs.status_code )
     assert rs.status_code == 201
+
+
+def test_list_order():
+    app = application.create_app(db_uri="sqlite:///red_test.db")
+    clientB = app.test_client()
+    rs = clientB.get('/api/orders/1', follow_redirects=True)
+    
+    print('Respuesta', rs.status_code )
+    assert rs.status_code == 200
